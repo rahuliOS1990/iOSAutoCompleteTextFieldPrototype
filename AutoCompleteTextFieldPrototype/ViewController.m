@@ -55,25 +55,17 @@
 {
     [super viewDidAppear:animated];
 
-   // NSAttributedString *attrString=[[NSAttributedString alloc] initWithString:@"Add a focus" attributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f]}];
-    
-    
-   // [txtField setAttributedPlaceholder:attrString];
-    
-  //  [[txtField placeholder] drawInRect:CGRectZero withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f],NSForegroundColorAttributeName:[UIColor redColor]}];
-    
-    //[txtField drawPlaceholderInRect:txtField.frame];
-    
-  //  [txtField setFontForPlaceholer:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f] andColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
     
 }
-
+#pragma mark- TextField Delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
+
+#pragma mark- AutoComplete Datasources
 
 - (void)autoCompleteTextField:(LSAutoCompleteTextField *)textField
  possibleCompletionsForString:(NSString *)string
