@@ -784,6 +784,7 @@ withAutoCompleteString:(NSString *)string
 
 - (void)fetchAutoCompleteSuggestions
 {
+     
     
     if(self.disableAutoCompleteTableUserInteractionWhileFetching){
         [self.autoCompleteTableView setUserInteractionEnabled:NO];
@@ -1195,25 +1196,20 @@ withAutoCompleteString:(NSString *)string
 
 
 
-#pragma mark - Forcefully setting Font for placeholder
 
--(void)setFontForPlaceholer:(UIFont*)font andColor:(UIColor*)color
-{
+
+- (void)drawPlaceholderInRect:(CGRect)rect {
    
+    UIFont *font=self.fontForAutoCompletePlaceholder?self.fontForAutoCompletePlaceholder:self.font;
+    UIColor *color=self.autoCompletePlaceholderTextColor?self.autoCompletePlaceholderTextColor:self.textColor;
     
-    for (UIView *view in  self.subviews) {
-        
-         NSLog(@"subview description %@",view.subviews);
-        
-        if ([view isKindOfClass:NSClassFromString(@"UITextFieldLabel")]) {
-            UILabel *label=(UILabel*)view;
-            [label setFont:font];
-            [label setTextColor:color];
-        }
-        
-       
-    }
-
+    
+    
+    [self.placeholder drawInRect:rect
+                  withAttributes:@{
+                                   NSFontAttributeName:
+                                       font,NSForegroundColorAttributeName:color
+                                                                    }];
 }
 
 

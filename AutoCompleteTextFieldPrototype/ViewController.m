@@ -22,7 +22,7 @@
 
     
     
-    [txtField setPlaceholder:@"Add a Focus"];
+   [txtField setPlaceholder:@"Add a Focus"];
     
     [txtField setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:16.0f]];
     [txtField setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
@@ -38,6 +38,9 @@
     [txtField setAutoCompleteRegularFontName:@"AvenirNext-Bold"];
     [txtField setAutoCompleteFontSize:16.0f];
     [txtField setAutoCompleteRowHeight:25.0f];
+    [txtField setAutoCompletePlaceholderTextColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
+    [txtField setFontForAutoCompletePlaceholder:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f]];
+    
     txtField.autoCompleteDataSource=self;
     txtField.autoCompleteDelegate=self;
     
@@ -52,8 +55,16 @@
 {
     [super viewDidAppear:animated];
 
+   // NSAttributedString *attrString=[[NSAttributedString alloc] initWithString:@"Add a focus" attributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f]}];
     
-    [txtField setFontForPlaceholer:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f] andColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
+    
+   // [txtField setAttributedPlaceholder:attrString];
+    
+  //  [[txtField placeholder] drawInRect:CGRectZero withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f],NSForegroundColorAttributeName:[UIColor redColor]}];
+    
+    //[txtField drawPlaceholderInRect:txtField.frame];
+    
+  //  [txtField setFontForPlaceholer:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f] andColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
     
 }
 

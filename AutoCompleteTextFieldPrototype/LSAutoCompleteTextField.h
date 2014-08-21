@@ -127,11 +127,12 @@ willShowAutoCompleteTableView:(UITableView *)autoCompleteTableView;
 @property (nonatomic, strong) UIColor *autoCompleteTableBackgroundColor;
 @property (strong) UIColor *autoCompleteTableCellBackgroundColor;
 @property (strong) UIColor *autoCompleteTableCellTextColor;
+@property(strong)UIColor *autoCompletePlaceholderTextColor;
+@property(nonatomic,strong)UIFont *fontForAutoCompletePlaceholder;
 
 @property(nonatomic,strong)UIFont *fontForAutoCompleteTextInsideTextField;
 @property(strong)UIColor *colorForAutoCompleteTextInsideTextField;
 
--(void)setFontForPlaceholer:(UIFont*)font andColor:(UIColor*)color;
 
 - (void)registerAutoCompleteCellNib:(UINib *)nib forCellReuseIdentifier:(NSString *)reuseIdentifier;
 
