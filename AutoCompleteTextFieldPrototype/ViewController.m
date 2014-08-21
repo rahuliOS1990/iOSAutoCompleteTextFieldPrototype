@@ -64,7 +64,7 @@
     return YES;
 }
 
-- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+- (void)autoCompleteTextField:(LSAutoCompleteTextField *)textField
  possibleCompletionsForString:(NSString *)string
             completionHandler:(void (^)(NSArray *))handler
 {

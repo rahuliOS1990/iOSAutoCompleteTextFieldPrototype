@@ -21,7 +21,7 @@
 		9DB54E8319A48F1700E7BBD2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DB54E6519A48F1700E7BBD2 /* UIKit.framework */; };
 		9DB54E8B19A48F1700E7BBD2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DB54E8919A48F1700E7BBD2 /* InfoPlist.strings */; };
 		9DB54E8D19A48F1700E7BBD2 /* AutoCompleteTextFieldPrototypeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB54E8C19A48F1700E7BBD2 /* AutoCompleteTextFieldPrototypeTests.m */; };
-		9DB54E9819A4D6EB00E7BBD2 /* MLPAutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB54E9719A4D6EB00E7BBD2 /* MLPAutoCompleteTextField.m */; };
+		9DB54E9819A4D6EB00E7BBD2 /* LSAutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB54E9719A4D6EB00E7BBD2 /* LSAutoCompleteTextField.m */; };
 		9DB54E9B19A4D79400E7BBD2 /* NSString+Levenshtein.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB54E9A19A4D79400E7BBD2 /* NSString+Levenshtein.m */; };
 /* End PBXBuildFile section */
 
@@ -55,8 +55,8 @@
 		9DB54E8819A48F1700E7BBD2 /* AutoCompleteTextFieldPrototypeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoCompleteTextFieldPrototypeTests-Info.plist"; sourceTree = "<group>"; };
 		9DB54E8A19A48F1700E7BBD2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9DB54E8C19A48F1700E7BBD2 /* AutoCompleteTextFieldPrototypeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteTextFieldPrototypeTests.m; sourceTree = "<group>"; };
-		9DB54E9619A4D6EB00E7BBD2 /* MLPAutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextField.h; sourceTree = "<group>"; };
-		9DB54E9719A4D6EB00E7BBD2 /* MLPAutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPAutoCompleteTextField.m; sourceTree = "<group>"; };
+		9DB54E9619A4D6EB00E7BBD2 /* LSAutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAutoCompleteTextField.h; sourceTree = "<group>"; };
+		9DB54E9719A4D6EB00E7BBD2 /* LSAutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAutoCompleteTextField.m; sourceTree = "<group>"; };
 		9DB54E9919A4D79400E7BBD2 /* NSString+Levenshtein.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Levenshtein.h"; sourceTree = "<group>"; };
 		9DB54E9A19A4D79400E7BBD2 /* NSString+Levenshtein.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Levenshtein.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,8 +120,8 @@
 			children = (
 				9DB54E9919A4D79400E7BBD2 /* NSString+Levenshtein.h */,
 				9DB54E9A19A4D79400E7BBD2 /* NSString+Levenshtein.m */,
-				9DB54E9619A4D6EB00E7BBD2 /* MLPAutoCompleteTextField.h */,
-				9DB54E9719A4D6EB00E7BBD2 /* MLPAutoCompleteTextField.m */,
+				9DB54E9619A4D6EB00E7BBD2 /* LSAutoCompleteTextField.h */,
+				9DB54E9719A4D6EB00E7BBD2 /* LSAutoCompleteTextField.m */,
 				9DB54E7019A48F1700E7BBD2 /* AppDelegate.h */,
 				9DB54E7119A48F1700E7BBD2 /* AppDelegate.m */,
 				9DB54E7319A48F1700E7BBD2 /* Main.storyboard */,
@@ -261,7 +261,7 @@
 			files = (
 				9DB54E7819A48F1700E7BBD2 /* ViewController.m in Sources */,
 				9DB54E9B19A4D79400E7BBD2 /* NSString+Levenshtein.m in Sources */,
-				9DB54E9819A4D6EB00E7BBD2 /* MLPAutoCompleteTextField.m in Sources */,
+				9DB54E9819A4D6EB00E7BBD2 /* LSAutoCompleteTextField.m in Sources */,
 				9DB54E7219A48F1700E7BBD2 /* AppDelegate.m in Sources */,
 				9DB54E6E19A48F1700E7BBD2 /* main.m in Sources */,
 			);

@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MLPAutoCompleteTextField.h"
+#import "LSAutoCompleteTextField.h"
 
-@interface ViewController : UIViewController<MLPAutoCompleteTextFieldDataSource,MLPAutoCompleteTextFieldDelegate,UITextFieldDelegate>
+@interface ViewController : UIViewController<LSAutoCompleteTextFieldDataSource,LSAutoCompleteTextFieldDelegate,UITextFieldDelegate>
 
 {
-    IBOutlet MLPAutoCompleteTextField *txtField;
+    IBOutlet LSAutoCompleteTextField *txtField;
     IBOutlet UITextField *txt1;
 }
 @end

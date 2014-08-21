@@ -7,18 +7,18 @@
 
 
 
-@class MLPAutoCompleteTextField;
-@protocol MLPAutoCompleteTextFieldDelegate <NSObject>
+@class LSAutoCompleteTextField;
+@protocol LSAutoCompleteTextFieldDelegate <NSObject>
 
 @optional
-- (BOOL)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+- (BOOL)autoCompleteTextField:(LSAutoCompleteTextField *)textField
 shouldStyleAutoCompleteTableView:(UITableView *)autoCompleteTableView
                forBorderStyle:(UITextBorderStyle)borderStyle;
 
 
 /*IndexPath corresponds to the order of strings within the autocomplete table,
  not the original data source.*/
-- (BOOL)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+- (BOOL)autoCompleteTextField:(LSAutoCompleteTextField *)textField
           shouldConfigureCell:(UITableViewCell *)cell
        withAutoCompleteString:(NSString *)autocompleteString
          withAttributedString:(NSAttributedString *)boldedString
@@ -29,24 +29,24 @@ shouldStyleAutoCompleteTableView:(UITableView *)autoCompleteTableView
  not the original data source.
  autoCompleteObject may be nil if the selectedString had no object associated with it.
  */
-- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+- (void)autoCompleteTextField:(LSAutoCompleteTextField *)textField
   didSelectAutoCompleteString:(NSString *)selectedString
             forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 
 
 
-- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+- (void)autoCompleteTextField:(LSAutoCompleteTextField *)textField
 willShowAutoCompleteTableView:(UITableView *)autoCompleteTableView;
 
-- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+- (void)autoCompleteTextField:(LSAutoCompleteTextField *)textField
  didChangeNumberOfSuggestions:(NSInteger)numberOfSuggestions;
 
 @end
 
 
-@class MLPAutoCompleteTextField;
-@protocol MLPAutoCompleteTextFieldDataSource <NSObject>
+@class LSAutoCompleteTextField;
+@protocol LSAutoCompleteTextFieldDataSource <NSObject>
 
 
 @optional
@@ -55,21 +55,21 @@ willShowAutoCompleteTableView:(UITableView *)autoCompleteTableView;
 
 /*
  When you have the suggestions ready you must call the completionHandler block with
- an NSArray of strings or objects implementing the MLPAutoCompletionObject protocol that
+ an NSArray of strings or objects implementing the LSAutoCompletionObject protocol that
  could be used as possible completions for the given string in textField.
  */
-- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+- (void)autoCompleteTextField:(LSAutoCompleteTextField *)textField
  possibleCompletionsForString:(NSString *)string
             completionHandler:(void(^)(NSArray *suggestions))handler;
 
 
 
 /*
- Like the above, this method should return an NSArray of strings or objects implementing the MLPAutoCompletionObject protocol
+ Like the above, this method should return an NSArray of strings or objects implementing the LSAutoCompletionObject protocol
  that could be used as possible completions for the given string in textField.
  This method will be called asynchronously, so an immediate return is not necessary.
  */
-- (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+- (NSArray *)autoCompleteTextField:(LSAutoCompleteTextField *)textField
       possibleCompletionsForString:(NSString *)string;
 
 
@@ -78,24 +78,24 @@ willShowAutoCompleteTableView:(UITableView *)autoCompleteTableView;
 
 
 
-@protocol MLPAutoCompleteSortOperationDelegate <NSObject>
+@protocol LSAutoCompleteSortOperationDelegate <NSObject>
 - (void)autoCompleteTermsDidSort:(NSArray *)completions;
 @end
 
-@protocol MLPAutoCompleteFetchOperationDelegate <NSObject>
+@protocol LSAutoCompleteFetchOperationDelegate <NSObject>
 - (void)autoCompleteTermsDidFetch:(NSDictionary *)fetchInfo;
 @end
 
 
-@interface MLPAutoCompleteTextField : UITextField <UITableViewDataSource, UITableViewDelegate, MLPAutoCompleteSortOperationDelegate, MLPAutoCompleteFetchOperationDelegate>
+@interface LSAutoCompleteTextField : UITextField <UITableViewDataSource, UITableViewDelegate, LSAutoCompleteSortOperationDelegate, LSAutoCompleteFetchOperationDelegate>
 
 + (NSString *) accessibilityLabelForIndexPath:(NSIndexPath *)indexPath;
 
 @property (strong, readonly) UITableView *autoCompleteTableView;
 
 // all delegates and datasources should be weak referenced
-@property (weak) IBOutlet id <MLPAutoCompleteTextFieldDataSource> autoCompleteDataSource;
-@property (weak) IBOutlet id <MLPAutoCompleteTextFieldDelegate> autoCompleteDelegate;
+@property (weak) IBOutlet id <LSAutoCompleteTextFieldDataSource> autoCompleteDataSource;
+@property (weak) IBOutlet id <LSAutoCompleteTextFieldDelegate> autoCompleteDelegate;
 
 @property (assign) NSTimeInterval autoCompleteFetchRequestDelay; //default is 0.1, if you fetch from a web service you may want this higher to prevent multiple calls happening very quickly.
 @property (assign) BOOL sortAutoCompleteSuggestionsByClosestMatch;

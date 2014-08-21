@@ -3,7 +3,7 @@
 #define kHTAutoCompleteButtonWidth  30
 
 
-#import "MLPAutoCompleteTextField.h"
+#import "LSAutoCompleteTextField.h"
 
 #import "NSString+Levenshtein.h"
 #import <QuartzCore/QuartzCore.h>
@@ -15,14 +15,14 @@ static NSString *kSortObjectKey = @"sortObject";
 static NSString *kKeyboardAccessoryInputKeyPath = @"autoCompleteTableAppearsAsKeyboardAccessory";
 const NSTimeInterval DefaultAutoCompleteRequestDelay = 0.1;
 
-@interface MLPAutoCompleteSortOperation: NSOperation
+@interface LSAutoCompleteSortOperation: NSOperation
 @property (strong) NSString *incompleteString;
 @property (strong) NSArray *possibleCompletions;
-@property (strong) id <MLPAutoCompleteSortOperationDelegate> delegate;
+@property (strong) id <LSAutoCompleteSortOperationDelegate> delegate;
 @property (strong) NSDictionary *boldTextAttributes;
 @property (strong) NSDictionary *regularTextAttributes;
 
-- (id)initWithDelegate:(id<MLPAutoCompleteSortOperationDelegate>)aDelegate
+- (id)initWithDelegate:(id<LSAutoCompleteSortOperationDelegate>)aDelegate
       incompleteString:(NSString *)string
    possibleCompletions:(NSArray *)possibleStrings;
 
@@ -32,15 +32,15 @@ const NSTimeInterval DefaultAutoCompleteRequestDelay = 0.1;
 
 static NSString *kFetchedTermsKey = @"terms";
 static NSString *kFetchedStringKey = @"fetchInputString";
-@interface MLPAutoCompleteFetchOperation: NSOperation
+@interface LSAutoCompleteFetchOperation: NSOperation
 @property (strong) NSString *incompleteString;
-@property (strong) MLPAutoCompleteTextField *textField;
-@property (strong) id <MLPAutoCompleteFetchOperationDelegate> delegate;
-@property (strong) id <MLPAutoCompleteTextFieldDataSource> dataSource;
+@property (strong) LSAutoCompleteTextField *textField;
+@property (strong) id <LSAutoCompleteFetchOperationDelegate> delegate;
+@property (strong) id <LSAutoCompleteTextFieldDataSource> dataSource;
 
-- (id)initWithDelegate:(id<MLPAutoCompleteFetchOperationDelegate>)aDelegate
- completionsDataSource:(id<MLPAutoCompleteTextFieldDataSource>)aDataSource
- autoCompleteTextField:(MLPAutoCompleteTextField *)aTextField;
+- (id)initWithDelegate:(id<LSAutoCompleteFetchOperationDelegate>)aDelegate
+ completionsDataSource:(id<LSAutoCompleteTextFieldDataSource>)aDataSource
+ autoCompleteTextField:(LSAutoCompleteTextField *)aTextField;
 
 @end
 
@@ -50,7 +50,7 @@ static NSString *kAutoCompleteTableViewHiddenKeyPath = @"autoCompleteTableView.h
 static NSString *kBackgroundColorKeyPath = @"backgroundColor";
 static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCellIdentifier";
 
-@interface MLPAutoCompleteTextField ()
+@interface LSAutoCompleteTextField ()
 
 @property (strong, readwrite) UITableView *autoCompleteTableView;
 @property (strong) NSArray *autoCompleteSuggestions;
@@ -80,7 +80,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 
 
-@implementation MLPAutoCompleteTextField
+@implementation LSAutoCompleteTextField
 
 #pragma mark - Init
 
@@ -231,7 +231,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
         suggestedString = (NSString *)autoCompleteObject;
     }
     else {
-        NSAssert(0, @"Autocomplete suggestions must either be NSString or objects conforming to the MLPAutoCompletionObject protocol.");
+        NSAssert(0, @"Autocomplete suggestions must either be NSString or objects conforming to the LSAutoCompletionObject protocol.");
     }
     
     
@@ -360,8 +360,8 @@ withAutoCompleteString:(NSString *)string
     [self.autoCompleteSortQueue cancelAllOperations];
     
     if(self.sortAutoCompleteSuggestionsByClosestMatch){
-        MLPAutoCompleteSortOperation *operation =
-        [[MLPAutoCompleteSortOperation alloc] initWithDelegate:self
+        LSAutoCompleteSortOperation *operation =
+        [[LSAutoCompleteSortOperation alloc] initWithDelegate:self
                                               incompleteString:inputString
                                            possibleCompletions:completions];
         [self.autoCompleteSortQueue addOperation:operation];
@@ -791,7 +791,7 @@ withAutoCompleteString:(NSString *)string
     
     [self.autoCompleteFetchQueue cancelAllOperations];
     
-    MLPAutoCompleteFetchOperation *fetchOperation = [[MLPAutoCompleteFetchOperation alloc]
+    LSAutoCompleteFetchOperation *fetchOperation = [[LSAutoCompleteFetchOperation alloc]
                                                         initWithDelegate:self
                                                         completionsDataSource:self.autoCompleteDataSource
                                                         autoCompleteTextField:self];
@@ -803,7 +803,7 @@ withAutoCompleteString:(NSString *)string
 
 #pragma mark - Factory Methods
 
-- (UITableView *)newAutoCompleteTableViewForTextField:(MLPAutoCompleteTextField *)textField
+- (UITableView *)newAutoCompleteTableViewForTextField:(LSAutoCompleteTextField *)textField
 {
     CGRect dropDownTableFrame = [self autoCompleteTableViewFrameForTextField:textField];
     
@@ -817,7 +817,7 @@ withAutoCompleteString:(NSString *)string
     return newTableView;
 }
 
-- (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
+- (CGRect)autoCompleteTableViewFrameForTextField:(LSAutoCompleteTextField *)textField
                                  forNumberOfRows:(NSInteger)numberOfRows
 {
     CGRect newTableViewFrame             = [self autoCompleteTableViewFrameForTextField:textField];
@@ -840,7 +840,7 @@ withAutoCompleteString:(NSString *)string
     return newTableViewFrame;
 }
 
-- (CGFloat)autoCompleteTableHeightForTextField:(MLPAutoCompleteTextField *)textField
+- (CGFloat)autoCompleteTableHeightForTextField:(LSAutoCompleteTextField *)textField
                               withNumberOfRows:(NSInteger)numberOfRows
 {
     CGFloat maximumHeightMultiplier = (textField.maximumNumberOfAutoCompleteRows - textField.partOfAutoCompleteRowHeightToCut);
@@ -855,7 +855,7 @@ withAutoCompleteString:(NSString *)string
     return height;
 }
 
-- (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
+- (CGRect)autoCompleteTableViewFrameForTextField:(LSAutoCompleteTextField *)textField
 {
     CGRect frame = CGRectZero;
     
@@ -1235,8 +1235,8 @@ withAutoCompleteString:(NSString *)string
 
 
 #pragma mark -
-#pragma mark - MLPAutoCompleteFetchOperation
-@implementation MLPAutoCompleteFetchOperation{
+#pragma mark - LSAutoCompleteFetchOperation
+@implementation LSAutoCompleteFetchOperation{
     dispatch_semaphore_t sentinelSemaphore;
 }
 
@@ -1256,7 +1256,7 @@ withAutoCompleteString:(NSString *)string
         
         
         if([self.dataSource respondsToSelector:@selector(autoCompleteTextField:possibleCompletionsForString:completionHandler:)]){
-            __weak MLPAutoCompleteFetchOperation *operation = self;
+            __weak LSAutoCompleteFetchOperation *operation = self;
             sentinelSemaphore = dispatch_semaphore_create(0);
             [self.dataSource autoCompleteTextField:self.textField
                       possibleCompletionsForString:self.incompleteString
@@ -1297,7 +1297,7 @@ withAutoCompleteString:(NSString *)string
         if(suggestions.count){
             NSObject *firstObject = suggestions[0];
             NSAssert([firstObject isKindOfClass:[NSString class]],
-                     @"MLPAutoCompleteTextField expects an array with objects that are either strings.");
+                     @"LSAutoCompleteTextField expects an array with objects that are either strings.");
         }
         
         NSDictionary *resultsInfo = @{kFetchedTermsKey: suggestions,
@@ -1309,9 +1309,9 @@ withAutoCompleteString:(NSString *)string
     };
 }
 
-- (id)initWithDelegate:(id<MLPAutoCompleteFetchOperationDelegate>)aDelegate
- completionsDataSource:(id<MLPAutoCompleteTextFieldDataSource>)aDataSource
- autoCompleteTextField:(MLPAutoCompleteTextField *)aTextField
+- (id)initWithDelegate:(id<LSAutoCompleteFetchOperationDelegate>)aDelegate
+ completionsDataSource:(id<LSAutoCompleteTextFieldDataSource>)aDataSource
+ autoCompleteTextField:(LSAutoCompleteTextField *)aTextField
 {
     self = [super init];
     if (self) {
@@ -1341,9 +1341,9 @@ withAutoCompleteString:(NSString *)string
 
 
 #pragma mark -
-#pragma mark - MLPAutoCompleteSortOperation
+#pragma mark - LSAutoCompleteSortOperation
 
-@implementation MLPAutoCompleteSortOperation
+@implementation LSAutoCompleteSortOperation
 
 - (void)main
 {
@@ -1369,7 +1369,7 @@ withAutoCompleteString:(NSString *)string
     }
 }
 
-- (id)initWithDelegate:(id<MLPAutoCompleteSortOperationDelegate>)aDelegate
+- (id)initWithDelegate:(id<LSAutoCompleteSortOperationDelegate>)aDelegate
       incompleteString:(NSString *)string
    possibleCompletions:(NSArray *)possibleStrings
 {
@@ -1401,7 +1401,7 @@ withAutoCompleteString:(NSString *)string
         if([originalObject isKindOfClass:[NSString class]]){
             currentString = (NSString *)originalObject;
         } else {
-            NSAssert(0, @"Autocompletion terms must either be strings or objects conforming to the MLPAutoCompleteObject protocol.");
+            NSAssert(0, @"Autocompletion terms must either be strings or objects conforming to the LSAutoCompleteObject protocol.");
         }
         
         if(self.isCancelled){
