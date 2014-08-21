@@ -322,7 +322,9 @@ withAutoCompleteString:(NSString *)string
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *autoCompleteString = selectedCell.textLabel.text;
     self.text = autoCompleteString;
-    
+   
+    self.autocompleteDisabled=YES;
+    self.autocompleteLabel.hidden=YES;
   
     if([self.autoCompleteDelegate respondsToSelector:
         @selector(autoCompleteTextField:didSelectAutoCompleteString:forRowAtIndexPath:)]){
@@ -376,6 +378,9 @@ withAutoCompleteString:(NSString *)string
 {
     if(aNotification.object == self){
       
+        self.autocompleteDisabled=NO;
+        self.autocompleteLabel.hidden=NO;
+
         [self reloadData];
        
         if (self.autoCompleteSuggestions.count==0) {

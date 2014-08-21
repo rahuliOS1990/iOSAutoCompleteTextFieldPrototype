@@ -74,7 +74,7 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     dispatch_async(queue, ^{
         
-        NSArray *completions=[NSArray arrayWithObjects:@"Amity",@"Bat",@"Cat", nil];
+        NSArray *completions=[NSArray arrayWithObjects:@"Amity",@"Bat",@"Cat",@"Batsman", nil];
         handler(completions);
     });
 }
