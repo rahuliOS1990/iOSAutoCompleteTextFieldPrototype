@@ -391,6 +391,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoCompleteTextFieldPrototype/AutoCompleteTextFieldPrototype-Prefix.pch";
 				INFOPLIST_FILE = "AutoCompleteTextFieldPrototype/AutoCompleteTextFieldPrototype-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -404,6 +405,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoCompleteTextFieldPrototype/AutoCompleteTextFieldPrototype-Prefix.pch";
 				INFOPLIST_FILE = "AutoCompleteTextFieldPrototype/AutoCompleteTextFieldPrototype-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -468,6 +470,7 @@
 				9DB54E9219A48F1700E7BBD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9DB54E9319A48F1700E7BBD2 /* Build configuration list for PBXNativeTarget "AutoCompleteTextFieldPrototypeTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +479,7 @@
 				9DB54E9519A48F1700E7BBD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

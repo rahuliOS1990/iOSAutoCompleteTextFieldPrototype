@@ -13,5 +13,6 @@
 
 {
     IBOutlet MLPAutoCompleteTextField *txtField;
+    IBOutlet UITextField *txt1;
 }
 @end

@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QGr-z2-ejA" customClass="MLPAutoCompleteTextField">
-                                <rect key="frame" x="31" y="70" width="252" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a Focus" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QGr-z2-ejA" customClass="MLPAutoCompleteTextField">
+                                <rect key="frame" x="20" y="68" width="278" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="autoCompleteDataSource" destination="vXZ-lx-hvc" id="PJI-RB-8Uy"/>
@@ -27,10 +27,18 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="SvS-iJ-h6b"/>
                                 </connections>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" allowsEditingTextAttributes="YES" borderStyle="roundedRect" placeholder="Rahul" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bga-ks-4f8" customClass="MLPAutoCompleteTextField">
+                                <rect key="frame" x="82" y="279" width="230" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="txt1" destination="bga-ks-4f8" id="SHc-Xt-H19"/>
                         <outlet property="txtField" destination="QGr-z2-ejA" id="MwI-UA-vAz"/>
                     </connections>
                 </viewController>

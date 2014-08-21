@@ -18,11 +18,18 @@
 {
     [super viewDidLoad];
     
+    
+
+    
+    
+    [txtField setPlaceholder:@"Add a Focus"];
+    
     [txtField setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:16.0f]];
-[txtField setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
+    [txtField setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
     
     [txtField setFontForAutoCompleteTextInsideTextField:[UIFont fontWithName:@"AvenirNext-Bold" size:16.0f]];
     
+   
     
     [txtField setColorForAutoCompleteTextInsideTextField:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
     
@@ -33,9 +40,22 @@
     [txtField setAutoCompleteRowHeight:25.0f];
     txtField.autoCompleteDataSource=self;
     txtField.autoCompleteDelegate=self;
+    
+    
+    
+
+
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    
+    [txtField setFontForPlaceholer:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f] andColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
+    
+}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

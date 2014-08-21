@@ -1,16 +1,4 @@
-/*
- //  MLPAutoCompleteTextField.m
- //
- //
- //  Created by Eddy Borja on 12/29/12.
- //  Copyright (c) 2013 Mainloop LLC. All rights reserved.
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
+
 
 #define kHTAutoCompleteButtonWidth  30
 
@@ -101,6 +89,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     self = [super init];
     if (self) {
         [self initialize];
+         [self setupAutocompleteTextField];
     }
     return self;
 }
@@ -123,6 +112,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 {
     self = [super initWithCoder:coder];
     if (self) {
+        
         [self initialize];
     }
     return self;
@@ -136,6 +126,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 - (void)initialize
 {
+   
     [self beginObservingKeyPathsAndNotifications];
     
     [self setDefaultValuesForVariables];
@@ -384,7 +375,20 @@ withAutoCompleteString:(NSString *)string
 - (void)textFieldDidChangeWithNotification:(NSNotification *)aNotification
 {
     if(aNotification.object == self){
+      
         [self reloadData];
+       
+        if (self.autoCompleteSuggestions.count==0) {
+           
+        [self performSelector:@selector(refreshAutocompleteText) withObject:nil afterDelay:.3];
+        }
+        else
+        {
+           
+           [self refreshAutocompleteText];
+        }
+        
+    
     }
 }
 
@@ -900,7 +904,7 @@ withAutoCompleteString:(NSString *)string
 
 
 ///  Edited by Rahul
-#pragma mark- AutoComplete Text Field in TextField
+#pragma mark- AutoComplete Label in TextField
 
 
 - (void)awakeFromNib
@@ -956,7 +960,7 @@ withAutoCompleteString:(NSString *)string
     
     self.ignoreCase = YES;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ht_textDidChange:) name:UITextFieldTextDidChangeNotification object:self];
+ //   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ht_textDidChange:) name:UITextFieldTextDidChangeNotification object:self];
 }
 
 - (void)layoutSubviews
@@ -1190,7 +1194,33 @@ withAutoCompleteString:(NSString *)string
 
 
 
+
+#pragma mark - Forcefully setting Font for placeholder
+
+-(void)setFontForPlaceholer:(UIFont*)font andColor:(UIColor*)color
+{
+   
+    
+    for (UIView *view in  self.subviews) {
+        
+         NSLog(@"subview description %@",view.subviews);
+        
+        if ([view isKindOfClass:NSClassFromString(@"UITextFieldLabel")]) {
+            UILabel *label=(UILabel*)view;
+            [label setFont:font];
+            [label setTextColor:color];
+        }
+        
+       
+    }
+
+}
+
+
+
 /// Edited by Rahul
+
+
 
 
 
