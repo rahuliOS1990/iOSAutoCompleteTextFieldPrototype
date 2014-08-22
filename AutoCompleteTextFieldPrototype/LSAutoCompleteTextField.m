@@ -164,6 +164,11 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textFieldDidChangeWithNotification:)
                                                  name:UITextFieldTextDidChangeNotification object:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textFieldBeginWithNotification:)
+                                                 name:UITextFieldTextDidBeginEditingNotification object:self];
+    
 }
 
 - (void)stopObservingKeyPathsAndNotifications
@@ -176,6 +181,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     [self removeObserver:self forKeyPath:kKeyboardAccessoryInputKeyPath];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidBeginEditingNotification object:self];
 }
 
 
@@ -395,6 +401,30 @@ withAutoCompleteString:(NSString *)string
         
     
     }
+}
+
+-(void)textFieldBeginWithNotification:(NSNotification *)aNotification
+{
+    if(aNotification.object == self){
+        
+        self.autocompleteDisabled=NO;
+        self.autocompleteLabel.hidden=NO;
+        
+        [self reloadData];
+        
+        if (self.autoCompleteSuggestions.count==0) {
+            
+            [self performSelector:@selector(refreshAutocompleteText) withObject:nil afterDelay:.3];
+        }
+        else
+        {
+            
+            [self refreshAutocompleteText];
+        }
+        
+        
+    }
+
 }
 
 - (BOOL)becomeFirstResponder
@@ -1393,10 +1423,22 @@ withAutoCompleteString:(NSString *)string
         return [NSArray array];
     }
     
-    NSMutableArray *editDistances = [NSMutableArray arrayWithCapacity:possibleTerms.count];
+
+    /* Predicate is used to have only matching possible terms     */
     
     
-    for(NSObject *originalObject in possibleTerms) {
+  //  NSPredicate *predicate=[NSPredicate predicateWithFormat:@"self CONTAINS[cd] %@", inputString]; BEGINSWITH[cd]
+    
+     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"self BEGINSWITH[cd] %@", inputString];
+    
+    NSArray *filteredPossibelTerms=[possibleTerms filteredArrayUsingPredicate:predicate];
+    
+
+    
+    NSMutableArray *editDistances = [NSMutableArray arrayWithCapacity:filteredPossibelTerms.count];
+    
+    
+    for(NSObject *originalObject in filteredPossibelTerms) {
         
         NSString *currentString;
         if([originalObject isKindOfClass:[NSString class]]){
