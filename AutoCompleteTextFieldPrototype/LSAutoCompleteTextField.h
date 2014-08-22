@@ -117,6 +117,9 @@ willShowAutoCompleteTableView:(UITableView *)autoCompleteTableView;
 @property (assign) NSInteger maximumNumberOfAutoCompleteRows;
 @property (assign) CGFloat partOfAutoCompleteRowHeightToCut; // this number multiplied by autoCompleteRowHeight will be subtracted from total tableView height.
 @property (assign) CGFloat autoCompleteRowHeight;
+@property(assign)CGFloat autoCompleteTableViewHeaderHeight;
+@property(assign)CGFloat autoCompleteTableViewFooterHeight;
+
 @property (nonatomic, assign) CGRect autoCompleteTableFrame;
 @property (assign) CGSize autoCompleteTableOriginOffset;
 @property (assign) CGFloat autoCompleteTableCornerRadius; //only applies for drop down style autocomplete tables.

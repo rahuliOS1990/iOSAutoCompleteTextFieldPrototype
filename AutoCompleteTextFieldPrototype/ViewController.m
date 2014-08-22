@@ -23,6 +23,8 @@
     
     
    [txtField setPlaceholder:@"Add a Focus"];
+    [txtField setValue:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16] forKeyPath:@"_placeholderLabel.font"];
+    [txtField setValue:[UIColor colorWithWhite:0.600 alpha:1.000] forKeyPath:@"_placeholderLabel.textColor"];
     
     [txtField setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:16.0f]];
     [txtField setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
@@ -37,7 +39,15 @@
 
     [txtField setAutoCompleteRegularFontName:@"AvenirNext-Bold"];
     [txtField setAutoCompleteFontSize:16.0f];
-    [txtField setAutoCompleteRowHeight:25.0f];
+    [txtField setAutoCompleteRowHeight:22.0f];
+    [txtField setMaximumNumberOfAutoCompleteRows:10];
+    [txtField setAutoCompleteTableViewFooterHeight:5.0f];
+        [txtField setAutoCompleteTableViewHeaderHeight:5.0f];
+   
+    [txtField setApplyBoldEffectToAutoCompleteSuggestions:NO];
+    txtField.tintColor = [UIColor greenColor];
+    
+     
     [txtField setAutoCompletePlaceholderTextColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
     [txtField setFontForAutoCompletePlaceholder:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16.0f]];
     
@@ -74,7 +84,7 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     dispatch_async(queue, ^{
         
-        NSArray *completions=[NSArray arrayWithObjects:@"Amity",@"Bat",@"Cat",@"Batsman", nil];
+        NSArray *completions=[NSArray arrayWithObjects:@"Amity",@"Bat",@"Cat",@"Batsman",@"Uganda",@"Cricket",@"Alexander", nil];
         handler(completions);
     });
 }

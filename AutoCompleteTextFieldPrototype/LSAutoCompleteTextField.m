@@ -208,6 +208,36 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 #pragma mark - TableView Datasource
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 5;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width,5)];
+    UIView *viewImage=[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width,1)];
+    [viewImage setBackgroundColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
+    [view addSubview:viewImage];
+    [view setBackgroundColor:[UIColor clearColor]];
+    return view;
+    
+    
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width,5)];
+    [view setBackgroundColor:[UIColor clearColor]];
+    return view;
+    
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 5;
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger numberOfRows = [self.autoCompleteSuggestions count];
@@ -249,7 +279,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 - (UITableViewCell *)autoCompleteTableViewCellWithReuseIdentifier:(NSString *)identifier
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                    reuseIdentifier:identifier];
     [cell setBackgroundColor:[UIColor clearColor]];
     [cell.textLabel setTextColor:self.textColor];
@@ -288,16 +318,25 @@ withAutoCompleteString:(NSString *)string
     [cell.textLabel setTextColor:self.textColor];
     
     if(boldedString){
+        
         if ([cell.textLabel respondsToSelector:@selector(setAttributedText:)]) {
             [cell.textLabel setAttributedText:boldedString];
         } else{
             [cell.textLabel setText:string];
-            [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
+           // [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
+            if (self.fontForAutoCompleteTextInsideTextField)
+                [cell.textLabel setFont:self.fontForAutoCompleteTextInsideTextField];
+            else
+                [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
         }
     
     } else {
         [cell.textLabel setText:string];
-        [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
+      //  [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
+        if (self.fontForAutoCompleteTextInsideTextField)
+            [cell.textLabel setFont:self.fontForAutoCompleteTextInsideTextField];
+        else
+            [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
     }
     
     cell.accessibilityLabel = [[self class] accessibilityLabelForIndexPath:indexPath];
@@ -535,10 +574,11 @@ withAutoCompleteString:(NSString *)string
         [rootView insertSubview:self.autoCompleteTableView
                          belowSubview:self];
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
+        
         if(self.showTextFieldDropShadowWhenAutoCompleteTableIsOpen){
-            [self.layer setShadowColor:[[UIColor blackColor] CGColor]];
-            [self.layer setShadowOffset:CGSizeMake(0, 1)];
-            [self.layer setShadowOpacity:0.35];
+       //  [self.layer setShadowColor:[[UIColor blackColor] CGColor]];
+        // [self.layer setShadowOffset:CGSizeMake(0, 1)];
+         //   [self.layer setShadowOpacity:0.35];
         }
     } else {
         [self closeAutoCompleteTableView];
@@ -724,6 +764,10 @@ withAutoCompleteString:(NSString *)string
 
 - (void)setRoundedRectStyleForAutoCompleteTableView
 {
+    
+    self.autoCompleteTableViewHeaderHeight=3.0f;
+    self.autoCompleteTableViewFooterHeight=3.0f;
+    
     [self setAutoCompleteTableCornerRadius:8.0];
     [self setAutoCompleteTableOriginOffset:CGSizeMake(0, -18)];
     [self setAutoCompleteScrollIndicatorInsets:UIEdgeInsetsMake(18, 0, 0, 0)];
@@ -738,6 +782,9 @@ withAutoCompleteString:(NSString *)string
 
 - (void)setLineStyleForAutoCompleteTableView
 {
+    self.autoCompleteTableViewHeaderHeight=3.0f;
+    self.autoCompleteTableViewFooterHeight=3.0f;
+    
     [self setAutoCompleteTableCornerRadius:0.0];
     [self setAutoCompleteTableOriginOffset:CGSizeZero];
     [self setAutoCompleteScrollIndicatorInsets:UIEdgeInsetsZero];
@@ -754,18 +801,21 @@ withAutoCompleteString:(NSString *)string
 
 - (void)setNoneStyleForAutoCompleteTableView
 {
-    [self setAutoCompleteTableCornerRadius:8.0];
-    [self setAutoCompleteTableOriginOffset:CGSizeMake(0, 7)];
+    self.autoCompleteTableViewHeaderHeight=3.0f;
+    self.autoCompleteTableViewFooterHeight=3.0f;
+    
+  //  [self setAutoCompleteTableCornerRadius:8.0];
+    [self setAutoCompleteTableOriginOffset:CGSizeMake(0, 0)];
     [self setAutoCompleteScrollIndicatorInsets:UIEdgeInsetsZero];
     [self setAutoCompleteContentInsets:UIEdgeInsetsZero];
-    [self setAutoCompleteTableBorderWidth:1.0];
+  //  [self setAutoCompleteTableBorderWidth:1.0];
     
     
     UIColor *lightBlueColor = [UIColor colorWithRed:181/255.0
                                               green:204/255.0
                                                blue:255/255.0
                                               alpha:1.0];
-    [self setAutoCompleteTableBorderColor:lightBlueColor];
+   [self setAutoCompleteTableBorderColor:[UIColor clearColor]];
     
     
     UIColor *blueTextColor = [UIColor colorWithRed:23/255.0
@@ -859,8 +909,26 @@ withAutoCompleteString:(NSString *)string
     CGRect newTableViewFrame             = [self autoCompleteTableViewFrameForTextField:textField];
     
     UIView *rootView                     = [textField.window.subviews objectAtIndex:0];
-    CGRect textFieldFrameInContainerView = [rootView convertRect:textField.bounds
-                                                        fromView:textField];
+   
+    CGRect textFieldFrameInContainerView;
+    
+    if (self.borderStyle==UITextBorderStyleRoundedRect) {
+        
+        textFieldFrameInContainerView = [rootView convertRect:textField.bounds fromView:textField];
+    }
+    else
+    {
+        /* edited */
+        
+        textFieldFrameInContainerView=textField.frame;
+        textFieldFrameInContainerView.origin.y+=textField.frame.size.height;
+        
+        /* edited */
+    }
+    
+
+    
+   
     
     CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
     CGFloat converted_originY = textFieldFrameInContainerView.origin.y + textfieldTopInset;
@@ -888,6 +956,9 @@ withAutoCompleteString:(NSString *)string
     }
     
     CGFloat height = textField.autoCompleteRowHeight * heightMultiplier;
+    if (numberOfRows>0) {
+        height+=self.autoCompleteTableViewFooterHeight+self.autoCompleteTableViewHeaderHeight; /// offset height of header and footer
+    }
     return height;
 }
 
@@ -1232,7 +1303,7 @@ withAutoCompleteString:(NSString *)string
 
 
 
-
+/*
 - (void)drawPlaceholderInRect:(CGRect)rect {
    
     UIFont *font=self.fontForAutoCompletePlaceholder?self.fontForAutoCompletePlaceholder:self.font;
@@ -1247,6 +1318,7 @@ withAutoCompleteString:(NSString *)string
                                                                     }];
 }
 
+ */
 
 
 /// Edited by Rahul
@@ -1416,7 +1488,11 @@ withAutoCompleteString:(NSString *)string
 - (NSArray *)sortedCompletionsForString:(NSString *)inputString withPossibleStrings:(NSArray *)possibleTerms
 {
     if([inputString isEqualToString:@""]){
-        return possibleTerms;
+        
+        return [possibleTerms sortedArrayUsingComparator:^(NSString *firstObject, NSString *secondObject) {
+            return [firstObject caseInsensitiveCompare:secondObject];
+        }];
+      
     }
     
     if(self.isCancelled){
@@ -1432,6 +1508,7 @@ withAutoCompleteString:(NSString *)string
      NSPredicate *predicate=[NSPredicate predicateWithFormat:@"self BEGINSWITH[cd] %@", inputString];
     
     NSArray *filteredPossibelTerms=[possibleTerms filteredArrayUsingPredicate:predicate];
+    
     
 
     
@@ -1514,7 +1591,9 @@ withAutoCompleteString:(NSString *)string
     [results addObjectsFromArray:otherSuggestions];
     
     
-    return [NSArray arrayWithArray:results];
+    return [NSArray arrayWithArray:[results sortedArrayUsingComparator:^(NSString *firstObject, NSString *secondObject) {
+        return [firstObject caseInsensitiveCompare:secondObject];
+    }]];
 }
 
 
